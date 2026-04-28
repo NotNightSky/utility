@@ -1,10 +1,7 @@
 package net.notnightsky.utility.config;
 
 import dev.isxander.yacl3.api.*;
-import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
-import dev.isxander.yacl3.api.controller.DoubleFieldControllerBuilder;
-import dev.isxander.yacl3.api.controller.DoubleSliderControllerBuilder;
-import dev.isxander.yacl3.api.controller.EnumControllerBuilder;
+import dev.isxander.yacl3.api.controller.*;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
@@ -15,6 +12,8 @@ import net.minecraft.util.Identifier;
 import net.notnightsky.utility.handlers.keybindingNtoggleHandler;
 import net.notnightsky.utility.modules.zoom.InterpolationMode;
 
+import java.awt.*;
+
 public class config {
     public static ConfigClassHandler<config> HANDLER = ConfigClassHandler.createBuilder(config.class)
             .id(Identifier.of("utility"))
@@ -23,6 +22,18 @@ public class config {
                     .setJson5(true)
                     .build())
             .build();
+
+    @SerialEntry
+    public static boolean reachHitbox = false;
+
+    @SerialEntry
+    public static boolean reachCrosshair = false;
+
+    @SerialEntry
+    public static Color hitboxcolor = new Color(255, 255, 255, 255);
+
+    @SerialEntry
+    public static Color crosscolor = new Color(255, 255, 255,255);
 
     @SerialEntry
     public static InterpolationMode interpolationType = InterpolationMode.LOGARITHMIC;
@@ -135,6 +146,39 @@ public class config {
                                                 .enumClass(InterpolationMode.class)
                                                 .formatValue(v -> Text.literal(v.name().toLowerCase())))
                                         .build())
+                                .build())
+                        .group(OptionGroup.createBuilder()
+                                .name(Text.literal("Reach"))
+                                .description(OptionDescription.of(Text.literal("Reach based options")))
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.literal("Reachable Crosshair"))
+                                        .description(OptionDescription.of(Text.literal("Changes the color of the crosshair when pointed at a living entity")))
+                                        .binding(false, () -> config.reachCrosshair, newVal -> config.reachCrosshair = newVal)
+                                        .controller((Option<Boolean> opt) -> BooleanControllerBuilder.create(opt)
+                                                .trueFalseFormatter()
+                                                .coloured(true))
+                                        .build())
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.literal("Reachable Hitbox"))
+                                        .description(OptionDescription.of(Text.literal("Changes the color of the crosshair when pointed at a living entity")))
+                                        .binding(false, () -> config.reachHitbox, newVal -> config.reachHitbox = newVal)
+                                        .controller((Option<Boolean> opt) -> BooleanControllerBuilder.create(opt)
+                                                .trueFalseFormatter()
+                                                .coloured(true))
+                                        .build())
+                                .option(Option.<Color>createBuilder()
+                                        .name(Text.literal("Crosshair color"))
+                                        .binding(new Color(255, 255, 255, 255), () -> config.crosscolor, newVal -> config.crosscolor = newVal)
+                                        .controller(opt -> ColorControllerBuilder.create(opt)
+                                                .allowAlpha(true))
+                                        .build())
+                                .option(Option.<Color>createBuilder()
+                                        .name(Text.literal("Hitbox color"))
+                                        .binding(new Color(255, 255, 255, 255), () -> config.hitboxcolor, newVal -> config.hitboxcolor = newVal)
+                                        .controller(opt -> ColorControllerBuilder.create(opt)
+                                                .allowAlpha(true))
+                                        .build())
+                                .collapsed(true)
                                 .build())
                         .build())
                 .build();

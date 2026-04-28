@@ -5,7 +5,9 @@
   "compatibilityLevel": "JAVA_21",
   "client": [
     "doubleSliderCallBackMixin",
+    "EntityHitBoxDebugRendererMixin",
     "GameRendererMixin",
+    "InGameHudMixin",
     "MouseMixin"
   ],
   "injectors": {

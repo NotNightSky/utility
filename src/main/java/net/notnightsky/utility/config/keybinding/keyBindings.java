@@ -20,7 +20,7 @@ public class keyBindings {
     KeyBinding(
                 "key.skyutils.zoom",
                 InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_C,
+                GLFW.GLFW_KEY_UNKNOWN,
                 skyutilsCategory
                 ));
 
@@ -28,7 +28,7 @@ public class keyBindings {
     KeyBinding(
                 "key.skyutils.toggleFullBright",
                 InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_LEFT_ALT,
+                GLFW.GLFW_KEY_UNKNOWN,
                 skyutilsCategory
                 ));
 
@@ -36,7 +36,7 @@ public class keyBindings {
     KeyBinding(
                 "key.skyutils.incrementFullBright",
                 InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_KP_ADD,
+                 GLFW.GLFW_KEY_UNKNOWN,
                 skyutilsCategory
                 ));
 
@@ -44,7 +44,7 @@ public class keyBindings {
     KeyBinding(
                 "key.skyutils.decrementFullBright",
                 InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_KP_SUBTRACT,
+                GLFW.GLFW_KEY_UNKNOWN,
                 skyutilsCategory
                 ));
     }
