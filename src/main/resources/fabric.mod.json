@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "utility",
+  "version": "${version}",
+  "name": "utility",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/utility/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "net.notnightsky.utility.client.UtilityClient"
+    ]
+  },
+  "mixins": [
+    "utility.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
