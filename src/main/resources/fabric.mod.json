@@ -7,11 +7,13 @@
   "authors": [],
   "contact": {},
   "license": "All-Rights-Reserved",
-  "icon": "assets/utility/icon.png",
   "environment": "client",
   "entrypoints": {
     "client": [
-      "net.notnightsky.utility.client.UtilityClient"
+      "net.notnightsky.utility.UtilityClient"
+    ],
+    "modmenu": [
+      "net.notnightsky.utility.modmenuIntegration"
     ]
   },
   "mixins": [
@@ -20,6 +22,8 @@
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric-api": "*",
-    "minecraft": "${minecraft_version}"
+    "minecraft": "${minecraft_version}",
+    "yet_another_config_lib_v3": ">=3.8.2+1.21.11-fabric",
+    "modmenu": ">=17.0.0"
   }
 }

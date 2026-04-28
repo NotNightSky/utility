@@ -3,9 +3,10 @@
   "minVersion": "0.8",
   "package": "net.notnightsky.utility.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [
-  ],
   "client": [
+    "doubleSliderCallBackMixin",
+    "GameRendererMixin",
+    "MouseMixin"
   ],
   "injectors": {
     "defaultRequire": 1
