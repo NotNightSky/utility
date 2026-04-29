@@ -2,6 +2,7 @@ package net.notnightsky.utility.handlers;
 
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.Minecraft;
+import net.notnightsky.utility.config.presetSystem.PresetManager;
 import net.notnightsky.utility.config.config;
 
 import static net.notnightsky.utility.config.keybinding.keyBindings.*;
@@ -11,27 +12,34 @@ import static net.notnightsky.utility.modules.fullbright.fullbright.enableFullbr
 import static net.notnightsky.utility.modules.fullbright.fullbright.incrementFullBright;
 
 public class keybindingNtoggleHandler {
-    public static void registerToggle(){
-        
+    public static void registerToggle() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
 
-            if(!loaded && Minecraft.getInstance().options != null) {
+            if (!loaded && Minecraft.getInstance().options != null) {
                 loaded = true;
-                if(config.fullBright) {
+                if (config.fullBright) {
                     enableFullbright();
                 }
             }
 
-            if (incrementFullBright.consumeClick()){
+            if (incrementFullBright.consumeClick()) {
                 incrementFullBright();
             }
 
-            if (decrementFullBright.consumeClick()){
+            if (decrementFullBright.consumeClick()) {
                 decrementFullBright();
             }
 
             if (toggleFullBright.consumeClick()) {
                 toggleFullbright();
+            }
+
+            if (cyclePreset.consumeClick()) {
+                PresetManager.cycleNext();
+            }
+
+            if (previousPreset.consumeClick()) {
+                PresetManager.cyclePrevious();
             }
         });
     }
@@ -53,4 +61,5 @@ public class keybindingNtoggleHandler {
         }
         config.HANDLER.save();
     }
+
 }
