@@ -11,41 +11,54 @@ public class keyBindings {
     public static KeyMapping incrementFullBright;
     public static KeyMapping decrementFullBright;
     public static KeyMapping zoomKey;
+    public static KeyMapping cyclePreset;
+    public static KeyMapping previousPreset;
     public static boolean loaded = false;
 
-    public static void registerKeyMappings(){
-    KeyMapping.Category skyutilsCategory = KeyMapping.Category.register(Identifier.parse("skyutils"));
+    public static void registerKeyMappings() {
+        KeyMapping.Category skyutilsCategory = KeyMapping.Category.register(Identifier.parse("skyutils"));
 
-    zoomKey =KeyMappingHelper.registerKeyMapping(new
-    KeyMapping(
-                "key.skyutils.zoom",
+        zoomKey = KeyMappingHelper.registerKeyMapping(new KeyMapping(
+                "Zoom",
                 InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_UNKNOWN,
                 skyutilsCategory
-                ));
+        ));
 
-    toggleFullBright =KeyMappingHelper.registerKeyMapping(new
-    KeyMapping(
-                "key.skyutils.toggleFullBright",
+        toggleFullBright = KeyMappingHelper.registerKeyMapping(new KeyMapping(
+                "Toggle Fullbright",
                 InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_UNKNOWN,
                 skyutilsCategory
-                ));
+        ));
 
-    incrementFullBright =KeyMappingHelper.registerKeyMapping(new
-    KeyMapping(
-                "key.skyutils.incrementFullBright",
-                InputConstants.Type.KEYSYM,
-                 GLFW.GLFW_KEY_UNKNOWN,
-                skyutilsCategory
-                ));
-
-    decrementFullBright =KeyMappingHelper.registerKeyMapping(new
-    KeyMapping(
-                "key.skyutils.decrementFullBright",
+        incrementFullBright = KeyMappingHelper.registerKeyMapping(new KeyMapping(
+                "Fullbright Increment",
                 InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_UNKNOWN,
                 skyutilsCategory
-                ));
+        ));
+
+        decrementFullBright = KeyMappingHelper.registerKeyMapping(new KeyMapping(
+                "Fullbright Decrement",
+                InputConstants.Type.KEYSYM,
+                GLFW.GLFW_KEY_UNKNOWN,
+                skyutilsCategory
+        ));
+
+        cyclePreset = KeyMappingHelper.registerKeyMapping(new KeyMapping(
+                "Preset Forward",
+                InputConstants.Type.KEYSYM,
+                GLFW.GLFW_KEY_UNKNOWN,
+                skyutilsCategory
+        ));
+
+        previousPreset = KeyMappingHelper.registerKeyMapping(new KeyMapping(
+                "Preset Previous",
+                InputConstants.Type.KEYSYM,
+                GLFW.GLFW_KEY_UNKNOWN,
+                skyutilsCategory
+        ));
     }
 }
+
