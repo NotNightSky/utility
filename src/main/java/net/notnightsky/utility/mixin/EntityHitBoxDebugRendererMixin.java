@@ -23,7 +23,12 @@ public class EntityHitBoxDebugRendererMixin {
     )
     private int modifyHitboxColor(int originalColor, Entity entity, float tickProgress, boolean inLocalServer) {
         if (config.reachHitbox && isLookingAtValidTarget()) {
-            return config.hitboxcolor.getRGB();
+            HitResult hitResult = this.client.hitResult;
+            if (hitResult instanceof EntityHitResult entityHit){
+                if (entity == entityHit.getEntity()){
+                    return config.hitboxcolor.getRGB();
+                }
+            }
         }
         return originalColor;
     }
