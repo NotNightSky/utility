@@ -1,8 +1,8 @@
 package net.notnightsky.utility.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import net.minecraft.client.render.GameRenderer;
-import net.minecraft.client.render.RenderTickCounter;
+import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.renderer.GameRenderer;
 import net.notnightsky.utility.modules.zoom.DeltaTime;
 import net.notnightsky.utility.modules.zoom.zoomHelper;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,7 +18,7 @@ public class GameRendererMixin {
     }
 
     @Inject(method = "render", at = @At("HEAD"))
-    private void skyutils$updateZoom(RenderTickCounter tickCounter, boolean tick, CallbackInfo ci) {
+    private void skyutils$updateZoom(DeltaTracker tickCounter, boolean tick, CallbackInfo ci) {
         DeltaTime.update();
         zoomHelper.tick();
     }

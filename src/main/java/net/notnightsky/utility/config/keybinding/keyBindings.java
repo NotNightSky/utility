@@ -1,49 +1,49 @@
 package net.notnightsky.utility.config.keybinding;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.util.InputUtil;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.KeyMapping;
+import net.minecraft.resources.Identifier;
 import org.lwjgl.glfw.GLFW;
 
 public class keyBindings {
-    public static KeyBinding toggleFullBright;
-    public static KeyBinding incrementFullBright;
-    public static KeyBinding decrementFullBright;
-    public static KeyBinding zoomKey;
+    public static KeyMapping toggleFullBright;
+    public static KeyMapping incrementFullBright;
+    public static KeyMapping decrementFullBright;
+    public static KeyMapping zoomKey;
     public static boolean loaded = false;
 
     public static void registerKeybindings(){
-    KeyBinding.Category skyutilsCategory = KeyBinding.Category.create(Identifier.of("skyutils"));
+    KeyMapping.Category skyutilsCategory = KeyMapping.Category.register(Identifier.parse("skyutils"));
 
     zoomKey =KeyBindingHelper.registerKeyBinding(new
-    KeyBinding(
+    KeyMapping(
                 "key.skyutils.zoom",
-                InputUtil.Type.KEYSYM,
+                InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_UNKNOWN,
                 skyutilsCategory
                 ));
 
     toggleFullBright =KeyBindingHelper.registerKeyBinding(new
-    KeyBinding(
+    KeyMapping(
                 "key.skyutils.toggleFullBright",
-                InputUtil.Type.KEYSYM,
+                InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_UNKNOWN,
                 skyutilsCategory
                 ));
 
     incrementFullBright =KeyBindingHelper.registerKeyBinding(new
-    KeyBinding(
+    KeyMapping(
                 "key.skyutils.incrementFullBright",
-                InputUtil.Type.KEYSYM,
+                InputConstants.Type.KEYSYM,
                  GLFW.GLFW_KEY_UNKNOWN,
                 skyutilsCategory
                 ));
 
     decrementFullBright =KeyBindingHelper.registerKeyBinding(new
-    KeyBinding(
+    KeyMapping(
                 "key.skyutils.decrementFullBright",
-                InputUtil.Type.KEYSYM,
+                InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_UNKNOWN,
                 skyutilsCategory
                 ));
