@@ -2,40 +2,40 @@ package net.notnightsky.utility.mixin;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.hud.InGameHud;
-import net.minecraft.client.option.AttackIndicator;
-import net.minecraft.client.option.GameOptions;
-import net.minecraft.client.render.RenderTickCounter;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.hit.HitResult;
+import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.Options;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.notnightsky.utility.config.config;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Environment(EnvType.CLIENT)
-@Mixin(InGameHud.class)
+@Mixin(Gui.class)
 public class InGameHudMixin {
-    private MinecraftClient client;
+    @Unique
+    private final Minecraft client = Minecraft.getInstance();
 
     @Inject(method = "renderCrosshair", at = @At(value = "HEAD"), cancellable = true)
-    private void changeCrosshairColor(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
+    private void changeCrosshairColor(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
         if (!config.reachCrosshair){
             return;
         }
 
-        if (this.client == null || this.client.player == null || this.client.world == null) {
+        if (this.client.player == null || this.client.level == null) {
             return;
         }
 
-        GameOptions options = this.client.options;
-        if (options == null || !options.getPerspective().isFirstPerson()) {
+        Options options = this.client.options;
+        if (!options.getCameraType().isFirstPerson()) {
             return;
         }
 
@@ -54,9 +54,10 @@ public class InGameHudMixin {
         this.renderAttackIndicator(context);
     }
 
-    private void renderColoredCrosshair(DrawContext context, int color) {
-        int centerX = context.getScaledWindowWidth() / 2;
-        int centerY = context.getScaledWindowHeight() / 2;
+    @Unique
+    private void renderColoredCrosshair(GuiGraphics context, int color) {
+        int centerX = context.guiWidth() / 2;
+        int centerY = context.guiHeight() / 2;
         int crosshairSize = 4;
         int thickness = 1;
         int gap = 0;
@@ -68,12 +69,13 @@ public class InGameHudMixin {
         context.fill(centerX, centerY + gap, centerX + thickness, centerY + crosshairSize + gap + 1, color);
     }
 
+    @Unique
     private boolean isLookingAtValidTarget() {
         if (this.client == null || this.client.player == null) {
             return false;
         }
 
-        HitResult hitResult = this.client.crosshairTarget;
+        HitResult hitResult = this.client.hitResult;
         if (hitResult instanceof EntityHitResult entityHit) {
             Entity target = entityHit.getEntity();
             if (target instanceof LivingEntity livingTarget) {
@@ -83,18 +85,19 @@ public class InGameHudMixin {
         return false;
     }
 
-    private void renderAttackIndicator(DrawContext context) {
-        if (this.client == null || this.client.player == null) {
+    @Unique
+    private void renderAttackIndicator(GuiGraphics context) {
+        if (this.client.player == null) {
             return;
         }
 
-        float attackCooldown = this.client.player.getAttackCooldownProgress(0f);
+        float attackCooldown = this.client.player.getAttackStrengthScale(0f);
         if (attackCooldown >= 1f) {
             return;
         }
 
-        int centerX = context.getScaledWindowWidth() / 2;
-        int centerY = context.getScaledWindowHeight() / 2;
+        int centerX = context.guiWidth() / 2;
+        int centerY = context.guiHeight() / 2;
         int indicatorWidth = 16;
         int indicatorHeight = 2;
         int indicatorOffset = 10;

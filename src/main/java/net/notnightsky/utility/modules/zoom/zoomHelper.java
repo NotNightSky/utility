@@ -1,7 +1,7 @@
 package net.notnightsky.utility.modules.zoom;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.option.SimpleOption;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.OptionInstance;
 import net.notnightsky.utility.config.config;
 import net.notnightsky.utility.config.keybinding.keyBindings;
 
@@ -21,30 +21,30 @@ public class zoomHelper {
     private static Double defaultMouseSensitivity;
 
     public static float changeFovOnZoom(float fov) {
-        SimpleOption<Double> mouseSensitivitySetting = MinecraftClient.getInstance().options.getMouseSensitivity();
-        baseZoom = keyBindings.zoomKey.isPressed() ? defaultZoom : 1.0;
-        if(keyBindings.zoomKey.isPressed()){
+        OptionInstance<Double> mouseSensitivitySetting = Minecraft.getInstance().options.sensitivity();
+        baseZoom = keyBindings.zoomKey.isDown() ? defaultZoom : 1.0;
+        if(keyBindings.zoomKey.isDown()){
 
             baseZoom = defaultZoom;
         } else {
             baseZoom = 1.0;
             if(defaultMouseSensitivity != null)
             {
-                mouseSensitivitySetting.setValue(defaultMouseSensitivity);
+                mouseSensitivitySetting.set(defaultMouseSensitivity);
                 defaultMouseSensitivity = null;
             }
         }
 
         if(defaultMouseSensitivity == null)
-            defaultMouseSensitivity = mouseSensitivitySetting.getValue();
+            defaultMouseSensitivity = mouseSensitivitySetting.get();
 
-        mouseSensitivitySetting.setValue(defaultMouseSensitivity * (1.0 / currentLevel));
+        mouseSensitivitySetting.set(defaultMouseSensitivity * (1.0 / currentLevel));
 
         return (float) (fov / currentLevel);
     }
 
     public static void onMouseScroll(double vert) {
-        if (!keyBindings.zoomKey.isPressed()) return;
+        if (!keyBindings.zoomKey.isDown()) return;
         scrollVelocity += vert * 2.5;
     }
 
@@ -58,7 +58,7 @@ public class zoomHelper {
 
         scrollVelocity *= Math.exp(-12.0 * dt);
 
-        if (!keyBindings.zoomKey.isPressed()) {
+        if (!keyBindings.zoomKey.isDown()) {
             scrollZoom = 1.0;
         }
 
