@@ -20,7 +20,7 @@ public class zoomHelper {
 
     private static Double defaultMouseSensitivity;
 
-    public static float changeFovOnZoom(float fov) {
+    public static float changeFovOnZoom(double fov) {
         OptionInstance<Double> mouseSensitivitySetting = Minecraft.getInstance().options.sensitivity();
         baseZoom = keyBindings.zoomKey.isDown() ? defaultZoom : 1.0;
         if(keyBindings.zoomKey.isDown()){

@@ -6,7 +6,7 @@ import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.EntityHitResult;
@@ -24,8 +24,8 @@ public class InGameHudMixin {
     @Unique
     private final Minecraft client = Minecraft.getInstance();
 
-    @Inject(method = "renderCrosshair", at = @At(value = "HEAD"), cancellable = true)
-    private void changeCrosshairColor(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+    @Inject(method = "extractCrosshair", at = @At(value = "HEAD"), cancellable = true)
+    private void changeCrosshairColor(GuiGraphicsExtractor graphics, DeltaTracker deltaTracker, CallbackInfo ci) {
         if (!config.reachCrosshair){
             return;
         }
@@ -50,23 +50,23 @@ public class InGameHudMixin {
             crosshairColor = 0xBFFFFFFF; // White with some transparency
         }
 
-        this.renderColoredCrosshair(context, crosshairColor);
-        this.renderAttackIndicator(context);
+        this.renderColoredCrosshair(graphics, crosshairColor);
+        this.renderAttackIndicator(graphics);
     }
 
     @Unique
-    private void renderColoredCrosshair(GuiGraphics context, int color) {
-        int centerX = context.guiWidth() / 2;
-        int centerY = context.guiHeight() / 2;
+    private void renderColoredCrosshair(GuiGraphicsExtractor graphics, int color) {
+        int centerX = graphics.guiWidth() / 2;
+        int centerY = graphics.guiHeight() / 2;
         int crosshairSize = 4;
         int thickness = 1;
         int gap = 0;
 
         // Draw the four crosshair lines
-        context.fill(centerX - crosshairSize - gap, centerY, centerX - gap, centerY + thickness, color);
-        context.fill(centerX + gap, centerY, centerX + crosshairSize + gap + 1, centerY + thickness, color);
-        context.fill(centerX, centerY - crosshairSize - gap, centerX + thickness, centerY - gap, color);
-        context.fill(centerX, centerY + gap, centerX + thickness, centerY + crosshairSize + gap + 1, color);
+        graphics.fill(centerX - crosshairSize - gap, centerY, centerX - gap, centerY + thickness, color);
+        graphics.fill(centerX + gap, centerY, centerX + crosshairSize + gap + 1, centerY + thickness, color);
+        graphics.fill(centerX, centerY - crosshairSize - gap, centerX + thickness, centerY - gap, color);
+        graphics.fill(centerX, centerY + gap, centerX + thickness, centerY + crosshairSize + gap + 1, color);
     }
 
     @Unique
@@ -86,7 +86,7 @@ public class InGameHudMixin {
     }
 
     @Unique
-    private void renderAttackIndicator(GuiGraphics context) {
+    private void renderAttackIndicator(GuiGraphicsExtractor graphics) {
         if (this.client.player == null) {
             return;
         }
@@ -96,8 +96,8 @@ public class InGameHudMixin {
             return;
         }
 
-        int centerX = context.guiWidth() / 2;
-        int centerY = context.guiHeight() / 2;
+        int centerX = graphics.guiWidth() / 2;
+        int centerY = graphics.guiHeight() / 2;
         int indicatorWidth = 16;
         int indicatorHeight = 2;
         int indicatorOffset = 10;
@@ -106,10 +106,10 @@ public class InGameHudMixin {
         int y = centerY + indicatorOffset;
 
         // Draw background (dark blue-grey)
-        context.fill(x, y, x + indicatorWidth, y + indicatorHeight, 0xFF808080);
+        graphics.fill(x, y, x + indicatorWidth, y + indicatorHeight, 0xFF808080);
 
         // Draw progress (white)
         int progressWidth = (int)((float)indicatorWidth * attackCooldown);
-        context.fill(x, y, x + progressWidth, y + indicatorHeight, 0xFFFFFFFF);
+        graphics.fill(x, y, x + progressWidth, y + indicatorHeight, 0xFFFFFFFF);
     }
 }

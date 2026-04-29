@@ -1,7 +1,7 @@
 package net.notnightsky.utility.config.keybinding;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.resources.Identifier;
 import org.lwjgl.glfw.GLFW;
@@ -13,10 +13,10 @@ public class keyBindings {
     public static KeyMapping zoomKey;
     public static boolean loaded = false;
 
-    public static void registerKeybindings(){
+    public static void registerKeyMappings(){
     KeyMapping.Category skyutilsCategory = KeyMapping.Category.register(Identifier.parse("skyutils"));
 
-    zoomKey =KeyBindingHelper.registerKeyBinding(new
+    zoomKey =KeyMappingHelper.registerKeyMapping(new
     KeyMapping(
                 "key.skyutils.zoom",
                 InputConstants.Type.KEYSYM,
@@ -24,7 +24,7 @@ public class keyBindings {
                 skyutilsCategory
                 ));
 
-    toggleFullBright =KeyBindingHelper.registerKeyBinding(new
+    toggleFullBright =KeyMappingHelper.registerKeyMapping(new
     KeyMapping(
                 "key.skyutils.toggleFullBright",
                 InputConstants.Type.KEYSYM,
@@ -32,7 +32,7 @@ public class keyBindings {
                 skyutilsCategory
                 ));
 
-    incrementFullBright =KeyBindingHelper.registerKeyBinding(new
+    incrementFullBright =KeyMappingHelper.registerKeyMapping(new
     KeyMapping(
                 "key.skyutils.incrementFullBright",
                 InputConstants.Type.KEYSYM,
@@ -40,7 +40,7 @@ public class keyBindings {
                 skyutilsCategory
                 ));
 
-    decrementFullBright =KeyBindingHelper.registerKeyBinding(new
+    decrementFullBright =KeyMappingHelper.registerKeyMapping(new
     KeyMapping(
                 "key.skyutils.decrementFullBright",
                 InputConstants.Type.KEYSYM,

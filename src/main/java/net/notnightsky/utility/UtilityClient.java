@@ -10,7 +10,7 @@ public class UtilityClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        keyBindings.registerKeybindings();
+        keyBindings.registerKeyMappings();
         keybindingNtoggleHandler.registerToggle();
         new modmenuIntegration();
         ClientTickEvents.END_CLIENT_TICK.register(client -> new fullbright().noDarknessEffect());
