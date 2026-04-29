@@ -113,7 +113,7 @@ public class PresetManager {
         Minecraft mc = Minecraft.getInstance();
         if (mc.player != null) {
             mc.player.displayClientMessage(
-                    Component.literal("§6[Utility] §rPreset: §e" + name),
+                    Component.literal("Preset: §e" + name),
                     true
             );
         }
