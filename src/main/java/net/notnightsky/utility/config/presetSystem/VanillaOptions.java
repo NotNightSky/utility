@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft;
 public class VanillaOptions {
     public Double gamma;
     public Integer renderDistance;
+    public Integer simulationDistance;
     public Double sensitivity;
     public Integer fov;
     public Double mouseWheelSensitivity;
@@ -21,6 +22,16 @@ public class VanillaOptions {
     public Double textBackgroundOpacity;
     public Integer guiScale;
     public Boolean forceUnicodeFont;
+    public Integer cloudRange;
+    public Integer weatherRadius;
+    public Boolean vignette;
+    public Boolean entityShadows;
+    public Boolean showSubtitles;
+    public Boolean touchscreen;
+    public Boolean fullscreen;
+    public Boolean invertXMouse;
+    public Boolean invertYMouse;
+    public Boolean discreteMouseScroll;
 
     public VanillaOptions() {}
 
@@ -31,6 +42,7 @@ public class VanillaOptions {
 
             opts.gamma = (Double) options.gamma().get();
             opts.renderDistance = (Integer) options.renderDistance().get();
+            opts.simulationDistance = (Integer) options.simulationDistance().get();
             opts.sensitivity = (Double) options.sensitivity().get();
             opts.fov = (Integer) options.fov().get();
             opts.mouseWheelSensitivity = (Double) options.mouseWheelSensitivity().get();
@@ -47,6 +59,16 @@ public class VanillaOptions {
             opts.textBackgroundOpacity = (Double) options.textBackgroundOpacity().get();
             opts.guiScale = (Integer) options.guiScale().get();
             opts.forceUnicodeFont = (Boolean) options.forceUnicodeFont().get();
+            opts.cloudRange = (Integer) options.cloudRange().get();
+            opts.weatherRadius = (Integer) options.weatherRadius().get();
+            opts.vignette = (Boolean) options.vignette().get();
+            opts.entityShadows = (Boolean) options.entityShadows().get();
+            opts.showSubtitles = (Boolean) options.showSubtitles().get();
+            opts.touchscreen = (Boolean) options.touchscreen().get();
+            opts.fullscreen = (Boolean) options.fullscreen().get();
+            opts.invertXMouse = (Boolean) options.invertMouseX().get();
+            opts.invertYMouse = (Boolean) options.invertMouseY().get();
+            opts.discreteMouseScroll = (Boolean) options.discreteMouseScroll().get();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -59,6 +81,7 @@ public class VanillaOptions {
 
             if (gamma != null) options.gamma().set(gamma);
             if (renderDistance != null) options.renderDistance().set(renderDistance);
+            if (simulationDistance != null) options.simulationDistance().set(simulationDistance);
             if (sensitivity != null) options.sensitivity().set(sensitivity);
             if (fov != null) options.fov().set(fov);
             if (mouseWheelSensitivity != null) options.mouseWheelSensitivity().set(mouseWheelSensitivity);
@@ -75,6 +98,16 @@ public class VanillaOptions {
             if (textBackgroundOpacity != null) options.textBackgroundOpacity().set(textBackgroundOpacity);
             if (guiScale != null) options.guiScale().set(guiScale);
             if (forceUnicodeFont != null) options.forceUnicodeFont().set(forceUnicodeFont);
+            if (cloudRange != null) options.cloudRange().set(cloudRange);
+            if (weatherRadius != null) options.weatherRadius().set(weatherRadius);
+            if (vignette != null) options.vignette().set(vignette);
+            if (entityShadows != null) options.entityShadows().set(entityShadows);
+            if (showSubtitles != null) options.showSubtitles().set(showSubtitles);
+            if (touchscreen != null) options.touchscreen().set(touchscreen);
+            if (fullscreen != null) options.fullscreen().set(fullscreen);
+            if (invertXMouse != null) options.invertMouseX().set(invertXMouse);
+            if (invertYMouse != null) options.invertMouseY().set(invertYMouse);
+            if (discreteMouseScroll != null) options.discreteMouseScroll().set(discreteMouseScroll);
         } catch (Exception e) {
             e.printStackTrace();
         }
