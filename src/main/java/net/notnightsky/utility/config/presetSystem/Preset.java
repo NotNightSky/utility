@@ -19,6 +19,7 @@ public class Preset {
     public boolean reachHitbox;
     public int crosscolor;
     public int hitboxcolor;
+    public VanillaOptions vanillaOptions;
 
     public Preset() {}
 
@@ -37,6 +38,7 @@ public class Preset {
         this.reachHitbox = config.reachHitbox;
         this.crosscolor = config.crosscolor.getRGB();
         this.hitboxcolor = config.hitboxcolor.getRGB();
+        this.vanillaOptions = VanillaOptions.capture();
     }
 
     public Color getCrossColor() {

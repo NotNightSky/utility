@@ -191,6 +191,7 @@ public class config {
             p.reachHitbox = reachHitboxOpt.pendingValue();
             p.crosscolor = crosscolorOpt.pendingValue().getRGB();
             p.hitboxcolor = hitboxcolorOpt.pendingValue().getRGB();
+            p.vanillaOptions = net.notnightsky.utility.config.presetSystem.VanillaOptions.capture();
             return p;
         };
 

@@ -55,7 +55,7 @@ public class PresetManager {
         save(list);
     }
 
-    public static void applyToConfig(Preset preset) {
+public static void applyToConfig(Preset preset) {
         if (preset == null) return;
         config.nodarkness = preset.nodarkness;
         config.gamma = preset.gamma;
@@ -70,6 +70,10 @@ public class PresetManager {
         config.crosscolor = preset.getCrossColor();
         config.hitboxcolor = preset.getHitboxColor();
         keybindingNtoggleHandler.setFullbright(preset.fullBright);
+
+        if (preset.vanillaOptions != null) {
+            preset.vanillaOptions.apply();
+        }
 
         config.HANDLER.save();
     }
