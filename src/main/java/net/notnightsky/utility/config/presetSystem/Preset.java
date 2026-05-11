@@ -19,6 +19,7 @@ public class Preset {
     public boolean reachHitbox;
     public int crosscolor;
     public int hitboxcolor;
+    public VanillaOptions vanillaOptions;
 
     public Preset() {}
 

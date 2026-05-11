@@ -71,6 +71,10 @@ public class PresetManager {
         config.hitboxcolor = preset.getHitboxColor();
         keybindingNtoggleHandler.setFullbright(preset.fullBright);
 
+        if (preset.vanillaOptions != null) {
+            preset.vanillaOptions.apply();
+        }
+
         config.HANDLER.save();
     }
 
